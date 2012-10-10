@@ -1,0 +1,90 @@
+<script>
+
+    var camera, scene, renderer, effect, light;
+    var geometry, material, mesh;
+
+    init();
+    animate();
+
+    function getCentroid( mesh ) {
+        mesh.geometry.computeBoundingBox();
+        var boundingBox = mesh.geometry.boundingBox;
+
+        var x0 = boundingBox.min.x;
+        var x1 = boundingBox.max.x;
+        var y0 = boundingBox.min.y;
+        var y1 = boundingBox.max.y;
+        var z0 = boundingBox.min.z;
+        var z1 = boundingBox.max.z;
+
+        var bWidth = ( x0 > x1 ) ? x0 - x1 : x1 - x0;
+        var bHeight = ( y0 > y1 ) ? y0 - y1 : y1 - y0;
+        var bDepth = ( z0 > z1 ) ? z0 - z1 : z1 - z0;
+
+        var centroidX = x0 + ( bWidth / 2 ) + mesh.position.x;
+        var centroidY = y0 + ( bHeight / 2 )+ mesh.position.y;
+        var centroidZ = z0 + ( bDepth / 2 ) + mesh.position.z;
+
+        var centroid = { x : centroidX, y : centroidY, z : centroidZ };
+
+        return centroid;
+    };
+
+    function init() {
+
+        camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+        camera.position.z = 100;
+
+        scene = new THREE.Scene();
+
+        // material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
+
+        material = new THREE.MeshPhongMaterial({ color: 0xCCCCCC });
+
+        light = new THREE.PointLight(0xFFFFFF);
+        light.position.y = 20;
+        scene.add(light);
+
+        var loader = new THREE.JSONLoader();
+        loader.load( '<%= raw @object.model.url %>', function ( geometry ) {
+    
+            mesh = new THREE.Mesh( geometry, material );
+            scene.add( mesh );
+            console.log( mesh );
+            var centroid = getCentroid( mesh );
+            console.log( centroid );
+            light.position.z = camera.position.z = mesh.boundRadius * 1.8;
+            
+        });
+
+        // geometry = new THREE.CubeGeometry( 500, 200, 200 );
+
+        // mesh = new THREE.Mesh( geometry, material );
+        // scene.add( mesh );
+
+        renderer = new THREE.WebGLRenderer();
+        // renderer = new THREE.AnaglyphWebGLRenderer();
+
+        renderer.setSize( window.innerWidth, window.innerHeight );
+
+        effect = new THREE.AnaglyphEffect( renderer, window.innerWidth, window.innerHeight );
+
+        document.body.appendChild( renderer.domElement );
+
+    }
+
+    function animate() {
+
+        // note: three.js includes requestAnimationFrame shim
+        requestAnimationFrame( animate );
+
+        if ( typeof mesh != 'undefined' ) {
+            mesh.rotation.x += 0.01;
+            mesh.rotation.y += 0.02;            
+        }
+
+        effect.render( scene, camera );
+        
+    }
+
+</script>
