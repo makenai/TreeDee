@@ -2,6 +2,7 @@
 
 <div id="tools">
     <a href="#" id="print">Print</a>
+    <a href="#" id="threedee">Toggle 3D</a>
     <a href="#" id="zoom-in">Zoom In</a>
     <a href="#" id="zoom-out">Zoom Out</a>
 </div>
@@ -16,10 +17,16 @@
         rotateX = 0,
         rotateY = 0,
         rotationXMouseDown = 0,
-        rotationYMouseDown = 0;
+        rotationYMouseDown = 0,
+        threedee = true;
 
     init();
     animate();
+
+    // Disable selection
+    document.onselectstart = function() {
+        return false;
+    };
 
     function getCentroid( mesh ) {
         mesh.geometry.computeBoundingBox();
@@ -65,7 +72,8 @@
     
             mesh = new THREE.Mesh( geometry, material );
             scene.add( mesh );
-            mesh.rotation.y = 0.5;
+
+            // mesh.scale.x = mesh.scale.y = mesh.scale.z = mesh.boundRadius / 6;
 
             // light.position.z = camera.position.z = mesh.boundRadius * 1.8;
             light.position.z = camera.position.z;
@@ -97,7 +105,11 @@
             mesh.rotation.y = rotationYMouseDown - rotateY;
         }
 
-        effect.render( scene, camera );
+        if ( threedee ) {
+            effect.render( scene, camera );
+        } else {
+            renderer.render( scene, camera );
+        }
         
     }
 
@@ -117,6 +129,7 @@
             mouseDownY = e.clientY;
             rotationXMouseDown = mesh.rotation.x,
             rotationYMouseDown = mesh.rotation.y;
+            rotateY = rotateX = 0;
 
         }).mouseup(function(e) {
 
@@ -135,7 +148,6 @@
 
         $('#zoom-in').click(function(e) {
             e.preventDefault();
-            e.stopPropagation();
             mesh.scale.x += 0.25;
             mesh.scale.y += 0.25;
             mesh.scale.z += 0.25;
@@ -143,10 +155,21 @@
 
         $('#zoom-out').click(function(e) {
             e.preventDefault();
-            e.stopPropagation();
             mesh.scale.x -= 0.25;
             mesh.scale.y -= 0.25;
             mesh.scale.z -= 0.25;
+        })
+
+
+        $('#threedee').click(function(e) {
+            e.preventDefault();
+            if ( threedee ) {
+                $(this).addClass('off');
+                threedee = false;
+            } else {
+                $(this).removeClass('off');
+                threedee = true;
+            }
         })
 
 
