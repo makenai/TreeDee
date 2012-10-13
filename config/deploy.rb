@@ -1,4 +1,5 @@
 require "bundler/capistrano"
+load 'deploy/assets'
 
 set :application, "TreeDee"
 set :repository,  "git@github.com:makenai/TreeDee.git"
