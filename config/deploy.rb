@@ -1,3 +1,5 @@
+require "bundler/capistrano"
+
 set :application, "TreeDee"
 set :repository,  "git@github.com:makenai/TreeDee.git"
 set :user, "ec2-user"
