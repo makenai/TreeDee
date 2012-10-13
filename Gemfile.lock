@@ -1,8 +1,9 @@
 GIT
   remote: https://github.com/makenai/mersh.git
-  revision: f30a5d1ac198f8121e05143cf33f3d41ea23c6ae
+  revision: 34087341a7668d0d31fa9bbf48d5ed1db72be30d
   specs:
-    mersh (0.0.2)
+    mersh (0.0.3)
+      json
 
 GEM
   remote: https://rubygems.org/
