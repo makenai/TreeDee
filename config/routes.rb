@@ -1,6 +1,8 @@
 TreeDeePrinter::Application.routes.draw do
 
 
+  mount Resque::Server, at: '/resque'
+
   resources :objects do
     collection do
       post 'fetch'
