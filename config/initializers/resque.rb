@@ -1,3 +1,4 @@
+Resque.redis = "localhost:6379"
 Resque.redis.namespace = "resque:earl:#{Rails.env}"
 
 Resque::Server.use(Rack::Auth::Basic) do |user, pass|
