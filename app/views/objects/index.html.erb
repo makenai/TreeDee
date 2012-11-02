@@ -1,15 +1,15 @@
 <h1 id="title">TreeDee</h1>
 
-<% if flash[:alert] %>
+<% if flash[:alert] || @error_message %>
 <div class="alert alert-error">
   <a href="#" class="close" data-dismiss="alert">×</a>
-  <%= flash[:alert] %>
+  <%= flash[:alert] || @error_message %>
 </div>
 <% end %>
 
 <form id="thingiverse-form" class="form-inline" action="<%= fetch_objects_path %>" method="post">
   <div class="input-append">
-    <input class="input-xxlarge" id="thingiverse-url" name="url" type="text" placeholder="Paste a Thingiverse URL here!" value="http://www.thingiverse.com/thing:30411">
+    <input class="input-xxlarge" id="thingiverse-url" name="url" type="text" placeholder="Paste a Thingiverse URL here!" value="http://www.thingiverse.com/derivative:42587">
     <button class="btn btn-large btn-inverse" type="submit"><i class="icon-ok icon-white"></i></button>
   </div>
 </form>

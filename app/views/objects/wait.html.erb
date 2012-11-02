@@ -1,0 +1,26 @@
+<div id="wait">
+  
+  <h1>Please wait!</h1>
+
+  <%= image_tag 'wait.gif' %>
+
+  <h2>Fetching and processing your model...</h2>
+
+</div>
+
+<script type="text/javascript">
+  var checkStatus = function() {
+    $.getJSON('/objects/<%= @id %>/status', function( data ) {
+      if ( data.status == 'requested' ) {
+        setTimeout( checkStatus, 1000 );
+      } else {
+        if ( data.status == 'complete' ) {
+          window.location = '/objects/<%= @id %>';
+        } else {
+          window.location = '/?error=<%= @id %>';
+        }
+      }
+    });
+  };
+  checkStatus();
+</script>
