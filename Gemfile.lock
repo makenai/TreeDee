@@ -81,6 +81,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.19)
+    minitest (3.4.0)
     multi_json (1.3.6)
     mysql2 (0.3.11)
     net-scp (1.0.4)
@@ -174,6 +175,7 @@ DEPENDENCIES
   jquery-rails
   less
   mersh!
+  minitest
   mysql2
   nokogiri
   paperclip (~> 3.0)
