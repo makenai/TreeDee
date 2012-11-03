@@ -3,19 +3,19 @@ load 'deploy/assets'
 
 set :application, "TreeDee"
 set :repository,  "git@github.com:makenai/TreeDee.git"
-set :user, "ec2-user"
+set :user, "release"
 set :use_sudo, false
 
-ssh_options[:keys] = "~/.ssh/makenai.pem"
+# ssh_options[:keys] = "~/.ssh/makenai.pem"
 ssh_options[:forward_agent] = true
 default_run_options[:pty] = true
 
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-role :web, "ec2-204-236-187-64.us-west-1.compute.amazonaws.com"                   # Your HTTP server, Apache/etc
-role :app, "ec2-204-236-187-64.us-west-1.compute.amazonaws.com"                   # This may be the same as your `Web` server
-role :db,  "ec2-204-236-187-64.us-west-1.compute.amazonaws.com", :primary => true # This is where Rails migrations will run
+role :web, "ooo.makenai.net"                   # Your HTTP server, Apache/etc
+role :app, "ooo.makenai.net"                   # This may be the same as your `Web` server
+role :db,  "ooo.makenai.net", :primary => true # This is where Rails migrations will run
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"

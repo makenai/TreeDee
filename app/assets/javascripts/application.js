@@ -15,3 +15,13 @@
 //= require twitter/bootstrap
 //= require three.min
 //= require AnaglyphEffect
+
+$(function() {
+
+  $('#thingiverse-form').submit(function(e) {
+    if ( $('#thingiverse-url').val() == '' ) {
+      e.preventDefault();
+    }
+  });
+
+});

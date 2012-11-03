@@ -20,6 +20,7 @@ class ObjectsController < ApplicationController
   end
 
   def fetch
+    raise URI::InvalidURIError if params[:url].empty?
     object = ObjectData.find_or_create_by_url( params[:url] )
     if object.model.exists?
       redirect_to object_url( object.id )
