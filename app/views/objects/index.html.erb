@@ -13,3 +13,13 @@
     <button class="btn btn-large btn-inverse" type="submit"><i class="icon-ok icon-white"></i></button>
   </div>
 </form>
+
+
+<% cache( { action: 'index', action_suffix: 'popular' }, expires_in: 5.minutes ) do %>
+<div id="popular">
+  <h4>Popular at Thingiverse</h4>
+  <% FeedItem.popular.sample(7).each do |i| %>
+    <%= link_to image_tag( i.image, width: 80, height: 80 ), fetch_objects_url( url: i.link ), method: :post, title: i.title %>
+  <% end %>
+</div>
+<% end %>

@@ -33,7 +33,7 @@ gem 'resque', require: 'resque/server'
 gem "paperclip", "~> 3.0"
 gem 'fog'
 gem 'bigdecimal'
-# gem 'feedzirra'
+gem 'feedzirra'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

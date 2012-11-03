@@ -13,7 +13,7 @@ class ObjectData < ActiveRecord::Base
       return handle_derivative if @uri.path.match %r{^/derivative:}
       return handle_stl  if @uri.path.match %r{^/download:}
     else
-      return handle_stl if @uri.path.match %r{\.stl$}
+      return handle_stl if @uri.path.match %r{\.stl$}i
     end
     raise URI::InvalidURIError
   end
@@ -64,8 +64,11 @@ class ObjectData < ActiveRecord::Base
       doc = Nokogiri::HTML( f )
       
       # <div class="thing-file" id="thing-file-93009" data-adddate="2012-10-08 19:34:03" data-dlcount="6" data-filetype="stl">
-      stl_files = doc.search('.thing-file[data-filetype=stl]')
-      raise "No STL files found at #{@uri.to_s}!" if stl_files.empty?
+      stl_files = doc.search('.thing-file[data-filetype=stl]') 
+      if stl_files.empty?
+        stl_files = doc.search('.thing-file[data-filetype=STL]')
+        raise "No STL files found at #{@uri.to_s}!" if stl_files.empty?
+      end
 
       href = stl_files.first.search('a').first.attr('href') rescue nil
       raise "Could not find STL download link" unless href

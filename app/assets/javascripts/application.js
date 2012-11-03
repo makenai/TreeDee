@@ -18,6 +18,7 @@
 
 $(function() {
 
+  // Prevent submission of an empty form
   $('#thingiverse-form').submit(function(e) {
     if ( $('#thingiverse-url').val() == '' ) {
       e.preventDefault();

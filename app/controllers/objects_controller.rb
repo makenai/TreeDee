@@ -5,6 +5,7 @@ class ObjectsController < ApplicationController
     if params[:error]
       @error_message = ObjectData.error_message( params[:error] )
     end
+    render layout: 'front'
   end
 
   def show
