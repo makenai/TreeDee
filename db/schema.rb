@@ -13,11 +13,10 @@
 
 ActiveRecord::Schema.define(:version => 20121009220356) do
 
-  create_table "object_data", :id => false, :force => true do |t|
-    t.string   "uuid",               :limit => 36, :null => false
+  create_table "object_data", :primary_key => "uuid", :force => true do |t|
     t.string   "url"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "model_file_name"
     t.string   "model_content_type"
     t.integer  "model_file_size"
@@ -25,5 +24,6 @@ ActiveRecord::Schema.define(:version => 20121009220356) do
   end
 
   add_index "object_data", ["url"], :name => "index_object_data_on_url", :unique => true
+  add_index "object_data", ["uuid"], :name => "sqlite_autoindex_object_data_1", :unique => true
 
 end
