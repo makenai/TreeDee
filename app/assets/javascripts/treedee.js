@@ -99,20 +99,6 @@ $(function() {
         }
     }
 
-    if ( $('#treedee').length > 0 ) {
-        init( modelToLoad );
-        
-        // React to window resizing
-        $(window).smartresize(function() {
-            canvasWidth  = window.innerWidth;
-            canvasHeight = window.innerHeight - 40;
-            renderer.setSize( canvasWidth, canvasHeight );
-            effect.setSize( canvasWidth, canvasHeight );
-            camera.aspect   = canvasWidth / canvasHeight;
-            camera.updateProjectionMatrix();
-        });
-    }
-
     // Mouse Rotation Stuff
 
     var mouseDown = false,
@@ -201,35 +187,47 @@ $(function() {
         moveMesh( 'y', -5 );
     });
 
-    $(document).keydown(function(e){
-        if (e.keyCode == 37) {
-           $('#pan-left').click();
-           return false;
-        }
-        if (e.keyCode == 38) {
-           $('#pan-up').click();
-           return false;
-        }
-        if (e.keyCode == 39) {
-           $('#pan-right').click();
-           return false;
-        }
-        if (e.keyCode == 40) {
-           $('#pan-down').click();
-           return false;
-        }
-        if (e.keyCode == 189) {
-           $('#zoom-out').click();
-           return false;
-        }
-        if (e.keyCode == 187) {
-           $('#zoom-in').click(); 
-           return false;
-        }
-           
+    if ( $('#treedee').length > 0 ) {
+        init( modelToLoad );
         
-    });
-
+        // React to window resizing
+        $(window).smartresize(function() {
+            canvasWidth  = window.innerWidth;
+            canvasHeight = window.innerHeight - 40;
+            renderer.setSize( canvasWidth, canvasHeight );
+            effect.setSize( canvasWidth, canvasHeight );
+            camera.aspect   = canvasWidth / canvasHeight;
+            camera.updateProjectionMatrix();
+        });
+ 
+        $(document).keydown(function(e){
+            if (e.keyCode == 37) {
+               $('#pan-left').click();
+               return false;
+            }
+            if (e.keyCode == 38) {
+               $('#pan-up').click();
+               return false;
+            }
+            if (e.keyCode == 39) {
+               $('#pan-right').click();
+               return false;
+            }
+            if (e.keyCode == 40) {
+               $('#pan-down').click();
+               return false;
+            }
+            if (e.keyCode == 189) {
+               $('#zoom-out').click();
+               return false;
+            }
+            if (e.keyCode == 187) {
+               $('#zoom-in').click(); 
+               return false;
+            }
+        });
+ 
+    }
 
     $('#print').click(function(e) {
         e.preventDefault();
