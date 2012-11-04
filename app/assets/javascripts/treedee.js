@@ -233,6 +233,7 @@ $(function() {
         e.preventDefault();
         var color = $(this).data('color');
         mesh.material.color.setHex( parseInt( '0x' + color ) );
+        $('#material').css( 'background-color', '#' + color );
     });
 
     $('#print').click(function(e) {
