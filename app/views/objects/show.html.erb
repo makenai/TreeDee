@@ -11,8 +11,8 @@
 
     var camera, scene, renderer, effect, light;
     var geometry, material, mesh;
-    var canvasWidth  = window.innerWidth - 40,
-        canvasHeight = window.innerHeight - 80,
+    var canvasWidth  = window.innerWidth,
+        canvasHeight = window.innerHeight - 40,
         rotateX = 0,
         rotateY = 0,
         rotationXMouseDown = 0,
@@ -29,8 +29,8 @@
 
     // React to window resizing
     $(window).smartresize(function(){  
-        canvasWidth  = window.innerWidth - 40;
-        canvasHeight = window.innerHeight - 80;
+        canvasWidth  = window.innerWidth;
+        canvasHeight = window.innerHeight - 40;
         renderer.setSize( canvasWidth, canvasHeight );
         effect.setSize( canvasWidth, canvasHeight );
         camera.aspect   = canvasWidth / canvasHeight;

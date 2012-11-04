@@ -12,7 +12,9 @@
  *= require_tree .
  */
 
-a.brand {
-  background: url(/assets/icon16x16.png) 0 10px no-repeat;
-  padding-left: 18px;
+a.brand i {
+  background: url(/assets/icon16x16.png) no-repeat;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
 }
