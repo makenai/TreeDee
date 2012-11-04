@@ -61,20 +61,24 @@ footer {
   #pan-left { background-image: url(/assets/arrow_left.png); }
   #pan-right { background-image: url(/assets/arrow_right.png); margin-bottom: 20px; }
   #material { border: 1px solid black; width: 30px; height: 30px; background-color: #FFFFFF; }
-  #color-selector {
+  #material-selector {
+    display: none;
     position: absolute;
-    top: 280px;
-    left: -220px;
-    width: 168px;
-    height: 200px;
+    top: 325px;
+    left: -135px;
+    width: 119px;
+    height: 120px;
     background-color: white;
     border: 1px solid black;
-    a { 
-      display: inline-block;
-      margin: 2px;
-      border: 1px solid black; 
-      width: 24px; 
-      height: 24px; 
+    #swatches {
+      a { 
+        display: block;
+        float: left;
+        margin: 3px 0 0 3px;
+        border: 1px solid black; 
+        width: 24px; 
+        height: 24px; 
+      }
     }
   }
 }

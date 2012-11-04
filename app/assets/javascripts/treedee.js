@@ -226,8 +226,14 @@ $(function() {
                return false;
             }
         });
- 
+
     }
+
+    $('#swatches a').click(function(e) {
+        e.preventDefault();
+        var color = $(this).data('color');
+        mesh.material.color.setHex( parseInt( '0x' + color ) );
+    });
 
     $('#print').click(function(e) {
         e.preventDefault();
@@ -238,6 +244,14 @@ $(function() {
         window.print();
         $('canvas').show();
         $img.remove();
+    });
+
+    $('#material').click(function(e) {
+        e.preventDefault();
+        $('#material-selector').fadeIn();
+    });
+    $('#material-selector').on('mouseleave', function() {
+        $('#material-selector').fadeOut();
     });
 
 
