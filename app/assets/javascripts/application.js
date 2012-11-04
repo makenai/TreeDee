@@ -16,6 +16,7 @@
 //= require three.min
 //= require AnaglyphEffect
 //= require smartresize
+//= require treedee
 
 $(function() {
 
