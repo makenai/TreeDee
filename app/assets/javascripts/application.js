@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.easing
 //= require twitter/bootstrap
 //= require three.min
 //= require AnaglyphEffect

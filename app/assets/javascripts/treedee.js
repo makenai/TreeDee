@@ -145,17 +145,74 @@ $(function() {
 
     $('#zoom-in').click(function(e) {
         e.preventDefault();
-        mesh.scale.x += 0.25;
-        mesh.scale.y += 0.25;
-        mesh.scale.z += 0.25;
+        $({ scale: mesh.scale.x }).animate( 
+            { scale: mesh.scale.x + 0.20 },
+            {
+                duration: 150,
+                easing: 'easeInOutQuint',
+                step: function( now, fx ) {
+                    mesh.scale.x = mesh.scale.y = mesh.scale.z = now;
+                }
+            }
+        );
     })
 
     $('#zoom-out').click(function(e) {
         e.preventDefault();
-        mesh.scale.x -= 0.25;
-        mesh.scale.y -= 0.25;
-        mesh.scale.z -= 0.25;
+        $({ scale: mesh.scale.x }).animate( 
+            { scale: mesh.scale.x - 0.20 },
+            {
+                duration: 150,
+                easing: 'easeInOutQuint',     
+                step: function( now, fx ) {
+                    mesh.scale.x = mesh.scale.y = mesh.scale.z = now;
+                }
+            }
+        );
     })
+
+    function moveMesh( property, amount ) {
+        $({ scale: mesh.position[ property ] }).animate( 
+            { scale: mesh.position[ property ] + amount },
+            {
+                duration: 150,
+                easing: 'easeInOutQuint',     
+                step: function( now, fx ) {
+                    mesh.position[ property ] = now;
+                }
+            }
+        );        
+    }
+
+    $('#pan-left').click(function(e) {
+        e.preventDefault();
+        moveMesh( 'x', -5 );
+    });
+    $('#pan-right').click(function(e) {
+        e.preventDefault();
+        moveMesh( 'x', 5 );
+    });
+    $('#pan-up').click(function(e) {
+        e.preventDefault();
+        moveMesh( 'y', 5 );
+    });
+    $('#pan-down').click(function(e) {
+        e.preventDefault();
+        moveMesh( 'y', -5 );
+    });
+
+    $(document).keydown(function(e){
+        if (e.keyCode == 37)
+           $('#pan-left').click();
+        if (e.keyCode == 38)
+           $('#pan-up').click();
+        if (e.keyCode == 39)
+           $('#pan-right').click();
+        if (e.keyCode == 40)
+           $('#pan-down').click();
+        return false;
+    });
+
 
     $('#print').click(function(e) {
         e.preventDefault();
