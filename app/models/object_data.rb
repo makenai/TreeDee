@@ -2,8 +2,14 @@ require 'open-uri'
 
 class ObjectData < ActiveRecord::Base
 
-  attr_accessible :url, :model
+  attr_accessible :url, :model, :uuid
+  self.primary_key = 'uuid'
+  before_create :generate_uuid
   has_attached_file :model, :default_url => ''
+
+  def generate_uuid
+    self.id = UUIDTools::UUID.random_create.to_s
+  end
 
   def fetch_model
     @uri = URI.parse( self.url )

@@ -13,10 +13,11 @@
 
 ActiveRecord::Schema.define(:version => 20121009220356) do
 
-  create_table "object_data", :force => true do |t|
+  create_table "object_data", :id => false, :force => true do |t|
+    t.string   "uuid",               :limit => 36, :null => false
     t.string   "url"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.string   "model_file_name"
     t.string   "model_content_type"
     t.integer  "model_file_size"
