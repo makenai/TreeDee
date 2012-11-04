@@ -15,6 +15,7 @@
 //= require twitter/bootstrap
 //= require three.min
 //= require AnaglyphEffect
+//= require smartresize
 
 $(function() {
 

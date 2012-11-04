@@ -11,8 +11,8 @@
 
     var camera, scene, renderer, effect, light;
     var geometry, material, mesh;
-    var canvasWidth  = 1170,
-        canvasHeight = 800,
+    var canvasWidth  = window.innerWidth - 40,
+        canvasHeight = window.innerHeight - 80,
         rotateX = 0,
         rotateY = 0,
         rotationXMouseDown = 0,
@@ -26,6 +26,16 @@
     document.onselectstart = function() {
         return false;
     };
+
+    // React to window resizing
+    $(window).smartresize(function(){  
+        canvasWidth  = window.innerWidth - 40;
+        canvasHeight = window.innerHeight - 80;
+        renderer.setSize( canvasWidth, canvasHeight );
+        effect.setSize( canvasWidth, canvasHeight );
+        camera.aspect   = canvasWidth / canvasHeight;
+        camera.updateProjectionMatrix();
+    });
 
     function getCentroid( mesh ) {
         mesh.geometry.computeBoundingBox();
