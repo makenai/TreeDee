@@ -59,7 +59,24 @@ footer {
   #pan-up { background-image: url(/assets/arrow_up.png); }
   #pan-down { background-image: url(/assets/arrow_down.png); }
   #pan-left { background-image: url(/assets/arrow_left.png); }
-  #pan-right { background-image: url(/assets/arrow_right.png); }
+  #pan-right { background-image: url(/assets/arrow_right.png); margin-bottom: 20px; }
+  #material { border: 1px solid black; width: 30px; height: 30px; background-color: #FFFFFF; }
+  #color-selector {
+    position: absolute;
+    top: 280px;
+    left: -220px;
+    width: 168px;
+    height: 200px;
+    background-color: white;
+    border: 1px solid black;
+    a { 
+      display: inline-block;
+      margin: 2px;
+      border: 1px solid black; 
+      width: 24px; 
+      height: 24px; 
+    }
+  }
 }
 
 #wait {

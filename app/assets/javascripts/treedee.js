@@ -146,7 +146,7 @@ $(function() {
     $('#zoom-in').click(function(e) {
         e.preventDefault();
         $({ scale: mesh.scale.x }).animate( 
-            { scale: mesh.scale.x + 0.20 },
+            { scale: mesh.scale.x + 0.15 },
             {
                 duration: 150,
                 easing: 'easeInOutQuint',
@@ -160,7 +160,7 @@ $(function() {
     $('#zoom-out').click(function(e) {
         e.preventDefault();
         $({ scale: mesh.scale.x }).animate( 
-            { scale: mesh.scale.x - 0.20 },
+            { scale: mesh.scale.x - 0.15 },
             {
                 duration: 150,
                 easing: 'easeInOutQuint',     
@@ -202,15 +202,32 @@ $(function() {
     });
 
     $(document).keydown(function(e){
-        if (e.keyCode == 37)
+        if (e.keyCode == 37) {
            $('#pan-left').click();
-        if (e.keyCode == 38)
+           return false;
+        }
+        if (e.keyCode == 38) {
            $('#pan-up').click();
-        if (e.keyCode == 39)
+           return false;
+        }
+        if (e.keyCode == 39) {
            $('#pan-right').click();
-        if (e.keyCode == 40)
+           return false;
+        }
+        if (e.keyCode == 40) {
            $('#pan-down').click();
-        return false;
+           return false;
+        }
+        if (e.keyCode == 189) {
+           $('#zoom-out').click();
+           return false;
+        }
+        if (e.keyCode == 187) {
+           $('#zoom-in').click(); 
+           return false;
+        }
+           
+        
     });
 
 
