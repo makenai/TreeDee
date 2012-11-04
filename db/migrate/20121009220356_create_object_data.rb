@@ -1,7 +1,7 @@
 class CreateObjectData < ActiveRecord::Migration
   def change
-    create_table( :object_data, :id => false ) do |t|
-      t.string :uuid, :limit => 36, :null => false, :primary => true
+    create_table( :object_data, :primary_key => :uuid ) do |t|
+      t.string :uuid, :limit => 36, :null => false
       t.string :url
       t.timestamps
     end
