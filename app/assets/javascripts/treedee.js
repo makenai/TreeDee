@@ -157,6 +157,17 @@ $(function() {
         mesh.scale.z -= 0.25;
     })
 
+    $('#print').click(function(e) {
+        e.preventDefault();
+        animate();
+        var dataURL = renderer.domElement.toDataURL();
+        var $img = $('<img />', { src: dataURL }).appendTo('#treedee');
+        $('canvas').hide();
+        window.print();
+        $('canvas').show();
+        $img.remove();
+    });
+
 
     $('#threedee').click(function(e) {
         e.preventDefault();

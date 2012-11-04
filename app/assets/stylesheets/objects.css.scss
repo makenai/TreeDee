@@ -74,3 +74,9 @@ footer {
   margin-top: 25px;
   margin-bottom: 25px;
 }
+
+// Print Stuff
+@page { size: landscape }
+@media print {
+  .navbar, #tools { display: none; }
+}
