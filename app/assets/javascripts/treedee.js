@@ -39,6 +39,17 @@ $(function() {
         return centroid;
     };
 
+    function d2r(degree) { 
+        return degree*(Math.PI/180);
+    };
+
+    function r2d(radians) { 
+        var degrees = ( radians * (180/Math.PI) ) % 360;
+        if ( degrees < 0 )
+            degrees += 360;
+        return degrees;
+    };
+
     function init( objectUrl ) {
 
         camera = new THREE.PerspectiveCamera( 75, canvasWidth / canvasHeight, 1, 1000 );
@@ -87,11 +98,6 @@ $(function() {
         // note: three.js includes requestAnimationFrame shim
         requestAnimationFrame( animate );
 
-        if ( typeof mesh != 'undefined' ) {
-            mesh.rotation.x = rotationXMouseDown - rotateX;
-            mesh.rotation.y = rotationYMouseDown - rotateY;
-        }
-
         if ( threedee ) {
             effect.render( scene, camera );
         } else {
@@ -107,6 +113,9 @@ $(function() {
 
     $(document).mousedown(function(e) {
         
+        if ( e.target.tagName != 'CANVAS' )
+            return;
+
         mouseDown = true;
         mouseDownX = e.clientX;
         mouseDownY = e.clientY;
@@ -119,12 +128,18 @@ $(function() {
         mouseDown = false;
 
     }).mousemove(function(e) {
-
         if ( mouseDown ) {
             rotateY = ( e.clientX - mouseDownX ) * 0.02;
             rotateX = ( e.clientY - mouseDownY ) * 0.02;
-        }
 
+            mesh.rotation.x = rotationXMouseDown - rotateX;
+            $( "#x-slider" ).slider({ value: r2d( mesh.rotation.x ) });
+
+            mesh.rotation.y = rotationYMouseDown - rotateY;
+            $( "#y-slider" ).slider({ value: r2d( mesh.rotation.y ) });
+
+            console.log( r2d( mesh.rotation.y ));
+        }
     });
 
     // Buttons
@@ -254,6 +269,37 @@ $(function() {
     $('#material-selector').on('mouseleave', function() {
         $('#material-selector').fadeOut();
     });
+
+    // Sliders and stuff..
+
+    $('#position').click(function(e) {
+        e.preventDefault();
+        $('#position-settings').fadeIn();
+    });
+    $('#position-settings').on('mouseleave', function() {
+        $('#position-settings').fadeOut();
+    });
+
+    $('#x-slider').slider({ min: 0, max: 360, slide: function( e, ui ) {
+        mesh.rotation.x = d2r( ui.value );
+        $('#x-label').val( ui.value );
+    }, change: function( e, ui ) { $('#x-label').val( ui.value ); }});
+
+    $('#y-slider').slider({ min: 0, max: 360, slide: function( e, ui ) {
+        mesh.rotation.y = d2r( ui.value );
+        $('#y-label').val( ui.value );
+    }, change: function( e, ui ) { $('#y-label').val( ui.value ); }});
+    
+    $('#z-slider').slider({ min: 0, max: 360, slide: function( e, ui ) {
+        mesh.rotation.z = d2r( ui.value );
+        $('#z-label').val( ui.value );
+    }, change: function( e, ui ) { $('#z-label').val( ui.value ); }});
+
+    $('#focal-length-slider').slider({ min: 1, max: 220, value: 125, slide: function( e, ui ) {
+        effect.setFocalLength( ui.value );
+        $('#focal-length-label').val( ui.value );
+    }, change: function( e, ui ) { $('#focal-length-label').val( ui.value ); }});   
+    $('#focal-length-label').val( 125 ); 
 
 
     $('#threedee').click(function(e) {

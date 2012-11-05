@@ -5,17 +5,28 @@
 </script>
 
 <div id="tools">
-    <a href="#" id="print">Print</a>
-    <a href="#" id="threedee">Toggle 3D</a>
-    <a href="#" id="zoom-in">Zoom In</a>
-    <a href="#" id="zoom-out">Zoom Out</a>
+    <a href="#" class="button" id="print">Print</a>
+    <a href="#" class="button" id="threedee">Toggle 3D</a>
+    <a href="#" class="button" id="zoom-in">Zoom In</a>
+    <a href="#" class="button" id="zoom-out">Zoom Out</a>
     
-    <a href="#" id="pan-left">Left</a>
-    <a href="#" id="pan-down">Down</a>
-    <a href="#" id="pan-up">Up</a>
-    <a href="#" id="pan-right">Right</a>
+    <a href="#" class="button" id="pan-left">Left</a>
+    <a href="#" class="button" id="pan-down">Down</a>
+    <a href="#" class="button" id="pan-up">Up</a>
+    <a href="#" class="button" id="pan-right">Right</a>
+    <a href="#" class="button" id="position">Position</a>
+    <div id="position-settings">
+      X rotation:<br />
+      <div id="x-slider"></div><input type="text" id="x-label" class="slider-label" value="0" /><br />
+      Y rotation:<br />
+      <div id="y-slider"></div><input type="text" id="y-label" class="slider-label" value="0" /><br />
+      Z rotation:<br />
+      <div id="z-slider"></div><input type="text" id="z-label" class="slider-label" value="0" /><br />
+      Focal length:<br />
+      <div id="focal-length-slider"></div><input type="text" id="focal-length-label" class="slider-label" value="0" />
+    </div>
 
-    <a href="#" id="material">Material</a>
+    <a href="#" class="button" id="material">Material</a>
     <div id="material-selector">
       <div id="swatches">
         <% %w{ 
@@ -24,7 +35,7 @@
           555555 5555FF 55FF55 55FFFF
           FF5555 FF55FF FFFF55 FFFFFF
         }.each do |color| %>
-          <a href="#" style="background-color: #<%= color %>;" data-color="<%= color %>"><%= color %></a>
+          <a href="#" class="button" style="background-color: #<%= color %>;" data-color="<%= color %>"><%= color %></a>
         <% end %>
       </div>
     </div>

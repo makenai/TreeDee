@@ -18,13 +18,14 @@ group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
   gem 'uglifier', '>= 1.0.3'
+  gem 'jquery-rails'
+  gem 'jquery-ui-rails'
 end
 
 group :production do
   gem 'mysql2'
 end
 
-gem 'jquery-rails'
 gem 'mersh', git: 'https://github.com/makenai/mersh.git'
 gem 'nokogiri'
 gem 'twitter-bootstrap-rails'

@@ -8,7 +8,8 @@ THREE.AnaglyphEffect = function ( renderer, width, height ) {
 
 	var eyeRight = new THREE.Matrix4();
 	var eyeLeft = new THREE.Matrix4();
-	var focalLength = 125;
+	var focalLength = 125,
+		cameraChanged = false;
 	var _aspect, _near, _far, _fov;
 
 	var _cameraL = new THREE.PerspectiveCamera();
@@ -90,6 +91,11 @@ THREE.AnaglyphEffect = function ( renderer, width, height ) {
 
 	};
 
+	this.setFocalLength = function ( length ) {
+		focalLength = length;
+		cameraChanged = true;
+	}
+
 	/*
 	 * Renderer now uses an asymmetric perspective projection
 	 * (http://paulbourke.net/miscellaneous/stereographics/stereorender/).
@@ -105,7 +111,7 @@ THREE.AnaglyphEffect = function ( renderer, width, height ) {
 	
 		if ( camera.parent === undefined ) camera.updateMatrixWorld();
 
-		var hasCameraChanged = ( _aspect !== camera.aspect ) || ( _near !== camera.near ) || ( _far !== camera.far ) || ( _fov !== camera.fov );
+		var hasCameraChanged = ( _aspect !== camera.aspect ) || ( _near !== camera.near ) || ( _far !== camera.far ) || ( _fov !== camera.fov ) || cameraChanged;
 
 		if ( hasCameraChanged ) {
 
@@ -144,7 +150,7 @@ THREE.AnaglyphEffect = function ( renderer, width, height ) {
 			projectionMatrix.elements[8] = ( xmax + xmin ) / ( xmax - xmin );
 
 			_cameraR.projectionMatrix.copy( projectionMatrix );
-
+			cameraChanged = false;
 		}
 
 		_cameraL.matrixWorld.copy( camera.matrixWorld ).multiplySelf( eyeLeft );
