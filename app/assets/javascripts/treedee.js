@@ -52,7 +52,7 @@ $(function() {
 
     function init( objectUrl ) {
 
-        camera = new THREE.PerspectiveCamera( 75, canvasWidth / canvasHeight, 1, 1000 );
+        camera = new THREE.PerspectiveCamera( 70, canvasWidth / canvasHeight, 1, 100000 );
         camera.position.z = 100;
 
         scene = new THREE.Scene();
@@ -60,6 +60,10 @@ $(function() {
         // material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
 
         material = new THREE.MeshPhongMaterial({ color: 0xFFFFFF });
+
+
+        var ambient = new THREE.AmbientLight( 0x050505 );
+        scene.add( ambient );
 
         light = new THREE.DirectionalLight(0xFFFFFF);
         light.position.y = 20;
@@ -71,7 +75,10 @@ $(function() {
             mesh = new THREE.Mesh( geometry, material );
             scene.add( mesh );
 
-            // mesh.scale.x = mesh.scale.y = mesh.scale.z = mesh.boundRadius / 6;
+
+            // console.log( 90 / mesh.boundRadius );
+
+            mesh.scale.x = mesh.scale.y = mesh.scale.z = 70 / mesh.boundRadius;
 
             // light.position.z = camera.position.z = mesh.boundRadius * 1.8;
             light.position.z = camera.position.z;
