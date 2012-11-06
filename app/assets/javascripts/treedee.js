@@ -83,9 +83,17 @@ $(function() {
         // mesh = new THREE.Mesh( geometry, material );
         // scene.add( mesh );
 
-        renderer = new THREE.WebGLRenderer();
-        // renderer = new THREE.AnaglyphWebGLRenderer();
-
+        try {
+            renderer = new THREE.WebGLRenderer();    
+        } catch( err ) {
+            alert("Oops. Your browser doesn't support WebGL! We've disabled the analglyphic effect " +
+                  "and your performance will be worse than normal. For the best experience, please try " +
+                  "a recent version of Chrome or Firefox.");
+            renderer = new THREE.CanvasRenderer();
+            threedee = false;
+            $('#threedee').addClass('off');
+        }
+        
         renderer.setSize( canvasWidth, canvasHeight );
         effect = new THREE.AnaglyphEffect( renderer, canvasWidth, canvasHeight );
 
@@ -137,8 +145,6 @@ $(function() {
 
             mesh.rotation.y = rotationYMouseDown - rotateY;
             $( "#y-slider" ).slider({ value: r2d( mesh.rotation.y ) });
-
-            console.log( r2d( mesh.rotation.y ));
         }
     });
 
@@ -304,12 +310,16 @@ $(function() {
 
     $('#threedee').click(function(e) {
         e.preventDefault();
-        if ( threedee ) {
-            $(this).addClass('off');
-            threedee = false;
+        if ( renderer instanceof THREE.WebGLRenderer ) {
+            if ( threedee ) {
+                $(this).addClass('off');
+                threedee = false;
+            } else {
+                $(this).removeClass('off');
+                threedee = true;
+            }            
         } else {
-            $(this).removeClass('off');
-            threedee = true;
+            alert("Sorry, WebGL is required for anaglyphic 3D! Try a recent Chrome or Firefox version.");
         }
     })
 
