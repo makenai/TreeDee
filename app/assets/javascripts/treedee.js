@@ -39,6 +39,14 @@ $(function() {
         return centroid;
     };
 
+    function centerDialogs() {
+        $('#loading').css({
+            top: ( window.innerHeight / 2 ) - 200,
+            left: ( window.innerWidth / 2 ) - 102,
+        });
+    }
+    centerDialogs();
+
     function d2r(degree) { 
         return degree*(Math.PI/180);
     };
@@ -69,6 +77,7 @@ $(function() {
         light.position.y = 20;
         scene.add(light);
 
+        $('#loading').show();
         var loader = new THREE.JSONLoader();
         loader.load( objectUrl, function ( geometry ) {
     
@@ -81,14 +90,10 @@ $(function() {
             mesh.scale.x = mesh.scale.y = mesh.scale.z = 70 / mesh.boundRadius;
 
             // light.position.z = camera.position.z = mesh.boundRadius * 1.8;
-            light.position.z = camera.position.z;
-            
+            light.position.z = camera.position.z - 10;
+    
+            $('#loading').hide();
         });
-
-        // geometry = new THREE.CubeGeometry( 500, 200, 200 );
-
-        // mesh = new THREE.Mesh( geometry, material );
-        // scene.add( mesh );
 
         try {
             renderer = new THREE.WebGLRenderer();    
@@ -226,6 +231,7 @@ $(function() {
             effect.setSize( canvasWidth, canvasHeight );
             camera.aspect   = canvasWidth / canvasHeight;
             camera.updateProjectionMatrix();
+            centerDialogs();
         });
  
         $(document).keydown(function(e){
