@@ -67,13 +67,13 @@ $(function() {
 
         // material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
 
-        material = new THREE.MeshPhongMaterial({ color: 0xFFFFFF });
+        material = new THREE.MeshPhongMaterial({ color: 0xAAAAAA, shininess: 100 });
 
 
         var ambient = new THREE.AmbientLight( 0x050505 );
         scene.add( ambient );
 
-        light = new THREE.DirectionalLight(0xFFFFFF);
+        light = new THREE.PointLight(0xFFFFFF, 1.2);
         light.position.y = 20;
         scene.add(light);
 
