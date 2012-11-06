@@ -281,6 +281,13 @@ $(function() {
         $img.remove();
     });
 
+    $('#image').click(function(e) {
+        e.preventDefault();
+        animate();
+        var dataURL = renderer.domElement.toDataURL();
+        window.location = dataURL;
+    });    
+
     $('#material').click(function(e) {
         e.preventDefault();
         $('#material-selector').fadeIn();
