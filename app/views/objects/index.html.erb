@@ -15,6 +15,13 @@
 </form>
 
 
+<div id="recent">
+  <h4>Recently Printed</h4>
+  <% Snapshot.recent.each do |snap| %>
+    <%= link_to image_tag( snap.image.url(:thumb), width: 80, height: 80 ), object_path( snap.object_uuid ) %>
+  <% end %>
+</div>
+
 <% cache( { action: 'index', action_suffix: 'popular' }, expires_in: 5.minutes ) do %>
 <div id="popular">
   <h4>Popular at Thingiverse</h4>

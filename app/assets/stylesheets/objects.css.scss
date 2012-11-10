@@ -114,7 +114,7 @@ footer {
   }
 }
 
-#popular {
+#popular, #recent {
   width: 600px;
   margin: auto;
   text-align: center;
@@ -126,6 +126,7 @@ footer {
 @page { size: landscape }
 @media print {
   .navbar, #tools { display: none; }
+  img { max-height: 100% !important; max-width: 100% !important; }
 }
 
 #loading {

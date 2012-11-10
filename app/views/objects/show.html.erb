@@ -5,7 +5,8 @@
 
 <div id="treedee"></div>
 <script type="text/javascript">
-    var modelToLoad = '<%= raw @object.model.url %>';
+    var modelToLoad = '<%= raw @object.model.url %>',
+      modelUUID = '<%= @object.id %>';
 </script>
 
 <div id="tools">

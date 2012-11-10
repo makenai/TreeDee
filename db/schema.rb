@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121009220356) do
+ActiveRecord::Schema.define(:version => 20121106094142) do
 
   create_table "object_data", :primary_key => "uuid", :force => true do |t|
     t.string   "url"
@@ -25,5 +25,18 @@ ActiveRecord::Schema.define(:version => 20121009220356) do
 
   add_index "object_data", ["url"], :name => "index_object_data_on_url", :unique => true
   add_index "object_data", ["uuid"], :name => "sqlite_autoindex_object_data_1", :unique => true
+
+  create_table "snapshots", :force => true do |t|
+    t.string   "object_uuid",        :limit => 36, :null => false
+    t.string   "snap_type"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "snapshots", ["object_uuid"], :name => "index_snapshots_on_object_uuid"
 
 end

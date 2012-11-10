@@ -274,18 +274,35 @@ $(function() {
         e.preventDefault();
         animate();
         var dataURL = renderer.domElement.toDataURL();
-        var $img = $('<img />', { src: dataURL }).appendTo('#treedee');
-        $('canvas').hide();
-        window.print();
-        $('canvas').show();
-        $img.remove();
+        $.post('/objects/' + modelUUID + '/snapshot', {
+            data: dataURL,
+            type: 'print'
+        }, function( data ) {
+            $('canvas').hide();
+            var $img = $('<img />', { src: dataURL }).appendTo('#treedee');
+            $img.load(function() {
+                window.print();
+                $('canvas').show();
+                $img.remove();
+            }).error(function() {
+                $('canvas').show();
+                $img.remove();
+                alert('Sorry, could not load image to print.');
+            });
+            
+        });
     });
 
     $('#image').click(function(e) {
         e.preventDefault();
         animate();
         var dataURL = renderer.domElement.toDataURL();
-        window.location = dataURL;
+        $.post('/objects/' + modelUUID + '/snapshot', {
+            data: dataURL,
+            type: 'image'
+        }, function( data ) {
+            window.location = data.url;
+        });
     });    
 
     $('#material').click(function(e) {
