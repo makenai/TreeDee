@@ -305,22 +305,50 @@ $(function() {
         });
     });    
 
+    // Material selectors
+
+    var materialTimeout;
     $('#material').click(function(e) {
         e.preventDefault();
-        $('#material-selector').fadeIn();
+        if ( $('#material-selector').is(":visible") ) {
+            $('#material-selector').fadeOut();
+        } else {
+            $('#position-settings').hide();
+            $('#material-selector').fadeIn();
+            materialTimeout = setTimeout(function() {
+                $('#material-selector').fadeOut();    
+            }, 1500);            
+        }
     });
     $('#material-selector').on('mouseleave', function() {
-        $('#material-selector').fadeOut();
+        materialTimeout = setTimeout(function() {
+            $('#material-selector').fadeOut();
+        }, 500);
+    }).on('mouseenter', function() {
+        clearTimeout( materialTimeout );
     });
 
     // Sliders and stuff..
 
+    var positionTimeout;
     $('#position').click(function(e) {
         e.preventDefault();
-        $('#position-settings').fadeIn();
+        if ( $('#position-settings').is(":visible") ) {
+            $('#position-settings').fadeOut();
+        } else {
+            $('#material-selector').hide();
+            $('#position-settings').fadeIn();
+            positionTimeout = setTimeout(function() {
+                $('#position-settings').fadeOut();    
+            }, 1500);            
+        }
     });
     $('#position-settings').on('mouseleave', function() {
-        $('#position-settings').fadeOut();
+        positionTimeout = setTimeout(function() {
+            $('#position-settings').fadeOut();
+        }, 500);
+    }).on('mouseenter', function() {
+        clearTimeout( positionTimeout );
     });
 
     $('#x-slider').slider({ min: 0, max: 360, slide: function( e, ui ) {
