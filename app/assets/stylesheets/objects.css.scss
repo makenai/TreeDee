@@ -231,3 +231,14 @@ footer {
   z-index: 1000;
   display: none;
 }
+
+#social-media {
+  position: absolute;
+  top: 10px;
+  right: -5px;
+  .fb-like {
+    margin-right: 10px;
+    position: relative;
+    top: -4px;
+  }
+}

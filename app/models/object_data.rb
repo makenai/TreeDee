@@ -6,10 +6,15 @@ class ObjectData < ActiveRecord::Base
   self.primary_key = 'uuid'
   before_create :generate_uuid
   has_attached_file :model, :default_url => ''
-  has_many :snapshots
+  has_many :snapshots, :foreign_key => 'object_uuid'
 
   def generate_uuid
     self.id = UUIDTools::UUID.random_create.to_s
+  end
+
+  def default_image
+    snapshot = self.snapshots.first
+    snapshot ? "http://treedee.net#{snapshot.image.url}" : 'http://treedee.net/assets/treedeetree.png'
   end
 
   def fetch_model

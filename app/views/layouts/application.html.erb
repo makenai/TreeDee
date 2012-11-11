@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "TreeDee" %></title>
+    <%= yield :header %>
     <%= csrf_meta_tags %>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -29,8 +30,13 @@
           <a class="brand" href="/"><i></i> TreeDee</a>
           <div class="container nav-collapse">
             <ul class="nav">
+              <li><a href="#about">About</a></li>
+              <li><a href="#about">3D Glasses?</a></li>
             </ul>
           </div><!--/.nav-collapse -->
+        </div>
+        <div id="social-media">
+          <%= yield :social_media %>
         </div>
       </div>
     </div>
@@ -56,6 +62,7 @@
       })();
 
     </script>
+
     <script type="text/javascript">
       var uvOptions = {};
       (function() {
@@ -64,6 +71,17 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
       })();
     </script>
+
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <div id="fb-root"></div>
+
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=527278637301509";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 
   </body>
 </html>

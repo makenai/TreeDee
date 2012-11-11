@@ -1,3 +1,15 @@
+<% content_for :header do %>
+  <meta property="og:title" content="A model at TreeDee.net"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="http://treedee.net/objects/<%= @object.id %>"/>
+  <meta property="og:image" content="<%= @object.default_image %>"/>
+  <meta property="og:site_name" content="TreeDee.net"/>
+<% end %>
+<% content_for :social_media do %>
+  <div class="fb-like" data-href="http://treedee.net" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+  <a href="https://twitter.com/share" data-url="http://treedee.net/objects/<%= @object.id %>" data-text="Check out this cool 3D model!" class="twitter-share-button" data-lang="en"></a>
+<% end %>
+
 <div id="loading">
   <img src="/assets/cogs204.gif" />
   Thinking about stuffs..
