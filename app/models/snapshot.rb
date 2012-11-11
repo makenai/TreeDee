@@ -10,7 +10,7 @@ class Snapshot < ActiveRecord::Base
   before_validation :get_image, :on => :create
 
   def self.recent
-    self.order('created_at desc').take(7)
+    self.order('created_at desc').take(6)
   end
 
   def object

@@ -7,6 +7,20 @@
 </div>
 <% end %>
 
+<div id="marketing">
+  <ul class="left">
+    <li>Revolutionariest 3D printing software that requires no platic filament, resins or special hardware!</li>
+    <li>All you need is a color printer, paper and visual cortex!</li>
+    <li>Money back guarantee.</li>
+  </ul>
+  <ul class="right">
+    <li>Works with standard STL files and smooth, smooth integration with <a href="http://www.thingiverse.com/">Thingiverse</a>!</li>
+    <li>You'll be printing out 3D objects in seconds!</li>
+    <li>Completely FREE!</li>
+  </ul>
+  <h3>Try it right meow!</h3>
+</div>
+
 <form id="thingiverse-form" class="form-inline" action="<%= fetch_objects_path %>" method="post">
   <div class="input-append">
     <input class="input-xxlarge" id="thingiverse-url" name="url" type="text" placeholder="Paste a Thingiverse URL here!">
@@ -14,19 +28,28 @@
   </div>
 </form>
 
+<div id="feeds">
 
-<div id="recent">
+  <div id="recent">
   <h4>Recently Printed</h4>
   <% Snapshot.recent.each do |snap| %>
-    <%= link_to image_tag( snap.image.url(:thumb), width: 80, height: 80 ), object_path( snap.object_uuid ) %>
+    <%= link_to image_tag( snap.image.url(:thumb) ), object_path( snap.object_uuid ) %>
   <% end %>
+  </div>
+
+  <% cache( { action: 'index', action_suffix: 'popular' }, expires_in: 5.minutes ) do %>
+  <div id="popular">
+    <h4>Popular at Thingiverse</h4>
+    <% FeedItem.popular.sample(6).each do |i| %>
+      <%= link_to image_tag( i.image ), fetch_objects_url( url: i.link ), method: :post, title: i.title %>
+    <% end %>
+  </div>
+  <% end %>
+
 </div>
 
-<% cache( { action: 'index', action_suffix: 'popular' }, expires_in: 5.minutes ) do %>
-<div id="popular">
-  <h4>Popular at Thingiverse</h4>
-  <% FeedItem.popular.sample(7).each do |i| %>
-    <%= link_to image_tag( i.image, width: 80, height: 80 ), fetch_objects_url( url: i.link ), method: :post, title: i.title %>
-  <% end %>
+<div id="sponsors">
+  <h4>Cool Sites!</h4>
+  <a href="http://3dprintweekly.com/" title="3D Print Weekly"><img src="/assets/3dprintweekly.png" alt="3D Print Weekly" /></a>
+  <a href="http://www.thingiverse.com" title="Thingiverse"><img src="/assets/thingiverse.png" alt="Thingiverse" /></a>
 </div>
-<% end %>

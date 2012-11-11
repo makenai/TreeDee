@@ -18,8 +18,34 @@ body {
   font-family: 'Marcellus', serif;
 }
 
+#marketing {
+  width: 700px;
+  font-size: 18px;
+  margin: auto;
+  ul {
+    width: 300px;
+    display: block;
+    margin: 0;
+  }
+  ul.left {
+    float: left;
+  }
+  ul.right {
+    float: right;
+  }
+  li {
+    margin-bottom: 15px;
+  }
+  h3 {
+    clear: both;
+    text-align: center;
+  }
+}
+
 #thingiverse-form {
+  clear: both;
   text-align: center;
+  margin-bottom: 30px;
 }
 
 #thingiverse-url {
@@ -114,12 +140,67 @@ footer {
   }
 }
 
-#popular, #recent {
-  width: 600px;
+#feeds {
+  width: 690px;
   margin: auto;
+  a {
+    display: inline-block;
+    width: 80px;
+    height: 65px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    img { border: 1px solid black; }
+  }
+  height: 230px;
+}
+
+#popular, #recent {
+  h4 { font-weight: bold; font-size: 18px; color: #404040; margin-top: 5px; margin-bottom: 15px; }
+  width: 320px;
+  padding: 5px;
   text-align: center;
-  margin-top: 25px;
+  background-color: rgb( 247, 242, 236 );
+  background-color: rgba( 247, 242, 236, 0.5 );
+  border: 1px solid #909090;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+#popular {
+  float: right;
+}
+#recent {
+  float: left;
+}
+
+#sponsors {
+  width: 690px;
+  margin: auto;
+  clear: both;
   margin-bottom: 25px;
+  h4 { 
+    font-size: 18px; 
+    color: #404040;
+    padding: 2px; 
+    text-align: center; 
+    margin: 0; 
+    margin-bottom: 15px;
+    background-color: rgb( 247, 242, 236 );
+    background-color: rgba( 247, 242, 236, 0.5 );
+    border: 1px solid #909090;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+  }
+  a {
+    width: 340px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+
+#footer {
 }
 
 // Print Stuff
