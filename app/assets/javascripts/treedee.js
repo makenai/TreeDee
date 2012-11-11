@@ -39,6 +39,16 @@ $(function() {
         return centroid;
     };
 
+    function loading( busy ) {
+        if ( busy ) {
+            $('#loading').show();
+            $('#tools').hide();
+        } else {
+            $('#loading').hide();
+            $('#tools').show();
+        }
+    }
+
     function centerDialogs() {
         $('#loading').css({
             top: ( window.innerHeight / 2 ) - 200,
@@ -77,7 +87,7 @@ $(function() {
         light.position.y = 20;
         scene.add(light);
 
-        $('#loading').show();
+        loading( true );
         var loader = new THREE.JSONLoader();
         loader.load( objectUrl, function ( geometry ) {
     
@@ -92,7 +102,7 @@ $(function() {
             // light.position.z = camera.position.z = mesh.boundRadius * 1.8;
             light.position.z = camera.position.z - 10;
     
-            $('#loading').hide();
+            loading( false );
         });
 
         try {
@@ -272,12 +282,14 @@ $(function() {
 
     $('#print').click(function(e) {
         e.preventDefault();
+        loading( true );
         animate();
         var dataURL = renderer.domElement.toDataURL();
         $.post('/objects/' + modelUUID + '/snapshot', {
             data: dataURL,
             type: 'print'
         }, function( data ) {
+            loading( false );
             $('canvas').hide();
             var $img = $('<img />', { src: dataURL }).appendTo('#treedee');
             $img.load(function() {
@@ -295,12 +307,14 @@ $(function() {
 
     $('#image').click(function(e) {
         e.preventDefault();
+        loading( true );
         animate();
         var dataURL = renderer.domElement.toDataURL();
         $.post('/objects/' + modelUUID + '/snapshot', {
             data: dataURL,
             type: 'image'
         }, function( data ) {
+            loading( false );
             window.location = data.url;
         });
     });    
@@ -326,11 +340,12 @@ $(function() {
         }, 500);
     }).on('mouseenter', function() {
         clearTimeout( materialTimeout );
-    });
+    }).on();
 
     // Sliders and stuff..
 
-    var positionTimeout;
+    var positionTimeout,
+        sliding = false;
     $('#position').click(function(e) {
         e.preventDefault();
         if ( $('#position-settings').is(":visible") ) {
@@ -343,12 +358,20 @@ $(function() {
             }, 1500);            
         }
     });
-    $('#position-settings').on('mouseleave', function() {
+    $('#position-settings').on('mouseleave', function(e) {
+        if ( sliding ) {
+            return;
+        }
         positionTimeout = setTimeout(function() {
             $('#position-settings').fadeOut();
         }, 500);
     }).on('mouseenter', function() {
         clearTimeout( positionTimeout );
+    }).on('mousedown', function() {
+        sliding = true;
+        $(document).one('mouseup', function() {
+            sliding = false;
+        });
     });
 
     $('#x-slider').slider({ min: 0, max: 360, slide: function( e, ui ) {
