@@ -9,13 +9,6 @@
 
 <h1 id="title">TreeDee</h1>
 
-<% if flash[:alert] || @error_message %>
-<div class="alert alert-error">
-  <a href="#" class="close" data-dismiss="alert">×</a>
-  <%= flash[:alert] || @error_message %>
-</div>
-<% end %>
-
 <div id="marketing">
   <ul class="left">
     <li>Revolutionariest 3D printing software that requires no plastic filament, resins or special hardware!</li>
@@ -29,6 +22,13 @@
   </ul>
   <h3>Try it right meow!</h3>
 </div>
+
+<% if flash[:alert] || @error_message %>
+<div class="alert alert-error">
+  <a href="#" class="close" data-dismiss="alert">×</a>
+  <%= flash[:alert] || @error_message %>
+</div>
+<% end %>
 
 <form id="thingiverse-form" class="form-inline" action="<%= fetch_objects_path %>" method="post">
   <div class="input-append">

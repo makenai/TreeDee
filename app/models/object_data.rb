@@ -19,7 +19,7 @@ class ObjectData < ActiveRecord::Base
 
   def fetch_model
     @uri = URI.parse( self.url )
-    is_thingiverse = !!@uri.host.match(%r{thingiverse\.com$})
+    is_thingiverse = !!@uri.host.match(%r{thingiverse\.com$}) rescue false
     if is_thingiverse
       return handle_html if @uri.path.match %r{^/thing:}
       return handle_derivative if @uri.path.match %r{^/derivative:}
@@ -27,7 +27,7 @@ class ObjectData < ActiveRecord::Base
     else
       return handle_stl if @uri.path.match %r{\.stl$}i
     end
-    raise URI::InvalidURIError
+    raise 'Bad URL. Is it at thingiverse?'
   end
 
   def handle_stl

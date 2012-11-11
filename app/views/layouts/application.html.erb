@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- | (• ◡•)| (❍ᴥ❍ʋ) -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -31,11 +32,9 @@
           </a>
           <a class="brand" href="/"><i></i> TreeDee</a>
           <div class="container nav-collapse">
-            <ul class="nav">
-<!--               
-              <li><a href="#about">About</a></li>
-              <li><a href="#about">3D Glasses?</a></li>
- -->
+            <ul class="nav">              
+              <li><a href="#aboutModal" data-toggle="modal">About</a></li>
+              <li><a href="#glassesModal" data-toggle="modal">3D Glasses?</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -52,6 +51,37 @@
       </div><!--/content-->
 
     </div> <!-- /container -->
+
+    <div id="aboutModal" class="modal hide fade in" style="display: none; ">  
+      <div class="modal-header">  
+        <a class="close" data-dismiss="modal">×</a>  
+        <h3>About</h3>  
+      </div>  
+      <div class="modal-body">    
+        <p>This site exists half way between the realm of humor and valuable learning exercises. 
+          Thanks to the awesome friend who told me "do it" when I decided to share the joke one morning.</p>
+        <p>Built on <a href="http://rubyonrails.org/">Rails</a>, <a href="http://threejs.org">three.js</a>, and <a href="http://rubygems.org/gems/mersh">mersh</a>.</p>
+        <p>Long live <b>#VegasTech</b>!</p>
+        <p style="text-align: right">-<a href="http://twitter.com/makenai">@makenai</a></p>
+      </div>
+    </div>  
+
+    <div id="glassesModal" class="modal hide fade in" style="display: none; ">  
+      <div class="modal-header">  
+        <a class="close" data-dismiss="modal">×</a>  
+        <h3>3D Glasses?</h3>  
+      </div>  
+      <div class="modal-body">    
+        <p>To see 3D you're probably going to need a pair of red and blue 3D 
+          glasses. The old kind. Like this: <img src="/assets/3d_glasses.png" alt="3D glasses" />.</p>
+        <p>You can find some for free <a href="http://free-3d-glasses.com/">here</a> or.. (while 
+          supplies last) you can send a self addressed stamped envelope to:</p>
+        <p>Pawel Szymczykowski<br />
+          2280 Corporate Circle #100<br />
+          Henderson, NV 89074</p>
+      </div>
+    </div>  
+
 
     <script type="text/javascript">
 

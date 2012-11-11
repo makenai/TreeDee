@@ -25,6 +25,7 @@
 <div id="tools">
     <a href="#" class="button" id="print">Print</a>
     <a href="#" class="button" id="image">Image</a>
+    <a href="#modelInfo" data-toggle="modal" class="button" id="info">Info</a>
 
     <a href="#" class="button" id="zoom-in">Zoom In</a>
     <a href="#" class="button" id="zoom-out">Zoom Out</a>    
@@ -58,4 +59,23 @@
         <% end %>
       </div>
     </div>
+
 </div>
+
+  <div id="modelInfo" class="modal hide fade in" style="display: none; ">  
+    <div class="modal-header">  
+      <a class="close" data-dismiss="modal">×</a>  
+      <h3>Model Information</h3>  
+    </div>  
+    <div class="modal-body">    
+      <p>This model was retrieved from <%= link_to @object.url, @object.url %> on <%= @object.created_at %></p>
+      <% if @object.snapshots.length > 0 %>
+      <h4>Recent Snapshots</h4>
+      <p>
+        <% @object.snapshots.limit(5).each do |snap| %>
+          <%= link_to image_tag( snap.image.url(:thumb) ), snap.image.url %>
+        <% end %>
+      </p>
+      <% end %>
+    </div>
+  </div>
