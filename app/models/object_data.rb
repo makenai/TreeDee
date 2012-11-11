@@ -14,7 +14,7 @@ class ObjectData < ActiveRecord::Base
 
   def default_image
     snapshot = self.snapshots.first
-    snapshot ? "http://treedee.net#{snapshot.image.url(:thumb)}" : 'http://treedee.net/assets/treedeetree.png'
+    snapshot ? "http://treedee.net#{snapshot.image.url(:medium)}" : 'http://treedee.net/assets/treedeetree.png'
   end
 
   def fetch_model

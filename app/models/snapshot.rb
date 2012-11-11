@@ -5,7 +5,7 @@ class Snapshot < ActiveRecord::Base
   attr_accessible :data, :object_uuid, :snap_type
   attr_accessor :data
   belongs_to :object_data, :foreign_key => 'object_uuid'
-  has_attached_file :image, :styles => { :thumb => "80x80>" }
+  has_attached_file :image, :styles => { :thumb => "80x80>", :medium => "200x200>" }
   validates_attachment_presence :image
   before_validation :get_image, :on => :create
 
