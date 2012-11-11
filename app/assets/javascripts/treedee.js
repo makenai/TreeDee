@@ -355,22 +355,38 @@ $(function() {
         mesh.rotation.x = d2r( ui.value );
         $('#x-label').val( ui.value );
     }, change: function( e, ui ) { $('#x-label').val( ui.value ); }});
+    $('#x-label').change(function(e) {
+        $( "#x-slider" ).slider({ value: $(this).val() });
+        mesh.rotation.x = d2r( $(this).val() );
+    });
 
     $('#y-slider').slider({ min: 0, max: 360, slide: function( e, ui ) {
         mesh.rotation.y = d2r( ui.value );
         $('#y-label').val( ui.value );
     }, change: function( e, ui ) { $('#y-label').val( ui.value ); }});
+    $('#y-label').change(function(e) {
+        $( "#y-slider" ).slider({ value: $(this).val() });
+        mesh.rotation.y = d2r( $(this).val() );
+    });
     
     $('#z-slider').slider({ min: 0, max: 360, slide: function( e, ui ) {
         mesh.rotation.z = d2r( ui.value );
         $('#z-label').val( ui.value );
     }, change: function( e, ui ) { $('#z-label').val( ui.value ); }});
+    $('#z-label').change(function(e) {
+        $( "#z-slider" ).slider({ value: $(this).val() });
+        mesh.rotation.z = d2r( $(this).val() );
+    });
 
     $('#focal-length-slider').slider({ min: 1, max: 220, value: 125, slide: function( e, ui ) {
         effect.setFocalLength( ui.value );
         $('#focal-length-label').val( ui.value );
     }, change: function( e, ui ) { $('#focal-length-label').val( ui.value ); }});   
     $('#focal-length-label').val( 125 ); 
+    $('#focal-length-label').change(function(e) {
+        $( "#focal-length-label" ).slider({ value: $(this).val() });
+        effect.setFocalLength( $(this).val() );
+    });
 
 
     $('#threedee').click(function(e) {
