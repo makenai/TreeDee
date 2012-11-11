@@ -7,7 +7,7 @@
   <meta property="og:description" content="Oh look, a cool 3D model! Why not take a look?"/>
 <% end %>
 <% content_for :social_media do %>
-  <div class="fb-like" data-href="http://treedee.net" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+  <div class="fb-like" data-href="http://treedee.net/objects/<%= @object.id %>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
   <a href="https://twitter.com/share" data-url="http://treedee.net/objects/<%= @object.id %>" data-text="Check out this cool 3D model!" class="twitter-share-button" data-lang="en"></a>
 <% end %>
 
