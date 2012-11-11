@@ -207,7 +207,7 @@ footer {
 // Print Stuff
 @page { size: landscape }
 @media print {
-  .navbar, #tools { display: none; }
+  .navbar, #tools { display: none !important; }
   img { max-height: 100% !important; max-width: 100% !important; }
 }
 
