@@ -48,8 +48,8 @@
 
   <% cache( { action: 'index', action_suffix: 'popular' }, expires_in: 5.minutes ) do %>
   <div id="popular">
-    <h4>Popular at Thingiverse</h4>
-    <% FeedItem.popular.sample(6).each do |i| %>
+    <h4>Featured at Thingiverse</h4>
+    <% FeedItem.featured.sample(6).each do |i| %>
       <%= link_to image_tag( i.image ), fetch_objects_url( url: i.link ), method: :post, title: i.title %>
     <% end %>
   </div>

@@ -10,6 +10,23 @@ class FeedItem
     []
   end
 
+  def self.recent
+    feed = Feedzirra::Feed.fetch_and_parse('http://www.thingiverse.com/rss/newest')
+    entries = feed.entries.select { |e| e.enclosure_url.to_s.match(/\.stl$/i) }
+    entries.collect { |e| self.new( e.title, e.url, e.summary ) }
+  rescue
+    []
+  end
+
+  def self.featured
+    feed = Feedzirra::Feed.fetch_and_parse('http://www.thingiverse.com/rss/featured')
+    entries = feed.entries.select { |e| e.enclosure_url.to_s.match(/\.stl$/i) }
+    entries.collect { |e| self.new( e.title, e.url, e.summary ) }
+  rescue
+    []
+  end
+
+
   def initialize( title, link, description )
     @title = title
     @link = link
